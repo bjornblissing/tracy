@@ -157,17 +157,18 @@ set(common_includes
     ${TRACY_PUBLIC_DIR}/common/TracyUwp.hpp
     ${TRACY_PUBLIC_DIR}/common/TracyYield.hpp)
 
-install(TARGETS TracyClient
-        EXPORT TracyConfig
-        RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR}
-        LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install(FILES ${tracy_includes}
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tracy)
 install(FILES ${client_includes}
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/client)
 install(FILES ${common_includes}
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/common)
+install(TARGETS TracyClient
+        EXPORT TracyConfig
+        RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR}
+        LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        PUBLIC_HEADER ${CMAKE_INSTALL_INCLUDEDIR})
 install(EXPORT TracyConfig
         NAMESPACE Tracy::
         FILE TracyTargets.cmake
